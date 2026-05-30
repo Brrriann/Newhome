@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import { Check } from 'lucide-react'
 import RagChatMockup from './mockups/RagChatMockup'
 import DashboardMockup from './mockups/DashboardMockup'
-import MobileMockup from './mockups/MobileMockup'
+import AttendanceMockup from './mockups/AttendanceMockup'
 import EcommerceMockup from './mockups/EcommerceMockup'
 
 type Item = {
@@ -38,13 +38,13 @@ const ITEMS: Item[] = [
     mockup: <DashboardMockup />,
   },
   {
-    id: 'mobile',
-    tag: 'MOBILE',
-    titleEn: 'Cross-platform App',
-    titleKo: '크로스플랫폼 모바일 앱',
-    desc: 'iOS와 Android를 한 번에. 네이티브급 성능과 매끄러운 경험으로 사용자가 머무는 앱을 만듭니다.',
-    features: ['푸시 알림 & 딥링크', '오프라인 지원', '생체 인증 보안'],
-    mockup: <MobileMockup />,
+    id: 'attendance',
+    tag: 'MOBILE · HR',
+    titleEn: 'Attendance & Check-in App',
+    titleKo: '근태관리 · 출퇴근 인증 앱',
+    desc: 'GPS 위치와 생체 인증으로 정확한 출퇴근을 기록하고, 근태 데이터를 실시간으로 집계합니다. 수기 관리에서 벗어나 인사 업무를 자동화합니다.',
+    features: ['GPS 위치 기반 인증', '얼굴 · 지문 생체 인증', '실시간 근태 집계 & 리포트'],
+    mockup: <AttendanceMockup />,
   },
   {
     id: 'commerce',
