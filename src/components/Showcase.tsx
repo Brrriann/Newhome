@@ -76,14 +76,14 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
   return (
     <div
       ref={ref}
-      className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start py-16 lg:py-28"
+      className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center py-12 lg:py-20"
     >
-      {/* Mockup — sticks while the text scrolls past on desktop */}
+      {/* Mockup */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className={`lg:sticky lg:top-28 ${flipped ? 'lg:order-2' : ''}`}
+        className={flipped ? 'lg:order-2' : ''}
       >
         <ScaleToFit designWidth={item.designWidth} maxScale={item.maxScale}>
           {item.mockup}
@@ -95,9 +95,7 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-        className={`flex flex-col justify-center lg:min-h-[60vh] ${
-          flipped ? 'lg:order-1' : ''
-        }`}
+        className={`flex flex-col justify-center ${flipped ? 'lg:order-1' : ''}`}
       >
         <span className="font-inter font-medium text-accent text-[11px] tracking-[0.25em] mb-4">
           {item.tag}
@@ -132,7 +130,7 @@ export default function Showcase() {
   const headInView = useInView(headRef, { once: true })
 
   return (
-    <section id="work" className="bg-[#050506] section-padding">
+    <section id="work" className="bg-[#050506] section-padding scroll-mt-20">
       <div className="container-app">
         <motion.div
           ref={headRef}

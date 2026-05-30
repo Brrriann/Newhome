@@ -45,7 +45,7 @@ export default function Services() {
   const headingInView = useInView(headingRef, { once: true })
 
   return (
-    <section id="services" className="bg-[#0A0A0A] section-padding">
+    <section id="services" className="bg-[#0A0A0A] section-padding scroll-mt-20">
       <div className="container-app">
         <motion.div
           ref={headingRef}

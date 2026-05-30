@@ -70,7 +70,7 @@ export default function Contact() {
     }`
 
   return (
-    <section id="contact" className="bg-[#0A0A0A] section-padding">
+    <section id="contact" className="bg-[#0A0A0A] section-padding scroll-mt-20">
       <div className="container-app">
         <motion.div
           ref={ref}

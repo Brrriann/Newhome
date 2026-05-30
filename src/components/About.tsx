@@ -55,7 +55,7 @@ export default function About() {
   const textInView = useInView(textRef, { once: true, margin: '-100px' })
 
   return (
-    <section id="about" className="bg-black section-padding">
+    <section id="about" className="bg-black section-padding scroll-mt-20">
       <div className="container-app">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
