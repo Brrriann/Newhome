@@ -69,9 +69,6 @@ export default function SplineScene({ className = '', onReady }: Props) {
       >
         {!revealed && <RobotLoader />}
       </div>
-
-      {/* Cover the "Built with Spline" badge (bottom-right of the iframe). */}
-      <div className="pointer-events-none absolute bottom-0 right-0 h-14 w-44 bg-black" />
     </div>
   )
 }
