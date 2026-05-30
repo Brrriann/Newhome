@@ -43,3 +43,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Removed from repo: cross-platform npm ci issue with Tailwind v4 native deps.
+# Cloudflare uses 'npm install' which resolves linux optional deps correctly.
+package-lock.json
