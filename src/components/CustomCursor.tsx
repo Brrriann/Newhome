@@ -24,18 +24,24 @@ export default function CustomCursor() {
   const ringY = useSpring(y, { stiffness: 250, damping: 28, mass: 0.6 })
 
   const rafRef = useRef<number | null>(null)
+  const latest = useRef({ x: -100, y: -100 })
 
   useEffect(() => {
     // Only enable for fine pointers (mouse), and not under reduced motion
     const fine = window.matchMedia('(pointer: fine)').matches
-    if (!fine || reduceMotion) return
+    if (!fine || reduceMotion) {
+      setEnabled(false)
+      return
+    }
     setEnabled(true)
 
     const move = (e: MouseEvent) => {
+      // Always keep the newest coords; RAF reads them so we never lag behind.
+      latest.current = { x: e.clientX, y: e.clientY }
       if (rafRef.current) return
       rafRef.current = requestAnimationFrame(() => {
-        x.set(e.clientX)
-        y.set(e.clientY)
+        x.set(latest.current.x)
+        y.set(latest.current.y)
         rafRef.current = null
       })
     }
