@@ -14,7 +14,7 @@ export default function MobileMockup() {
         {/* Balance card */}
         <div className="mx-4 rounded-2xl bg-gradient-to-br from-accent/20 to-[#3D8BFF]/10 border border-accent/20 p-4">
           <div className="text-[#aaa] text-[10px]">총 자산</div>
-          <div className="text-white font-syne font-extrabold text-2xl mt-1">
+          <div className="text-white font-syne font-extrabold text-[19px] leading-tight tracking-tight tabular-nums mt-1 whitespace-nowrap">
             ₩12,480,000
           </div>
           <div className="text-accent text-[10px] mt-1">+₩320,000 이번 달</div>
