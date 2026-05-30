@@ -35,7 +35,7 @@ export const SERVICES = [
 
 export const ABOUT_STATS = [
   { value: 50, suffix: '+', labelEn: 'Projects Delivered', labelKo: '프로젝트 완료' },
-  { value: 3,  suffix: '+', labelEn: 'Years of Experience', labelKo: '운영 연수' },
+  { value: 7,  suffix: '+', labelEn: 'Years of Experience', labelKo: '운영 연수' },
   { value: 20, suffix: '+', labelEn: 'Global Clients', labelKo: '글로벌 클라이언트' },
 ] as const;
 

@@ -35,14 +35,14 @@ function StatItem({
 }) {
   const count = useCountUp(stat.value, 1500, active)
   return (
-    <div className="text-center lg:text-left">
+    <div className="text-center">
       <div
-        className="font-syne font-extrabold text-accent"
-        style={{ fontSize: 'clamp(48px, 5vw, 72px)' }}
+        className="font-syne font-extrabold text-accent leading-none whitespace-nowrap"
+        style={{ fontSize: 'clamp(36px, 3.5vw, 56px)' }}
       >
         {count}{stat.suffix}
       </div>
-      <div className="font-inter text-[#888888] text-sm mt-1">{stat.labelEn}</div>
+      <div className="font-inter text-[#888888] text-sm mt-3">{stat.labelEn}</div>
       <div className="font-pretendard text-[#666666] text-xs mt-0.5">{stat.labelKo}</div>
     </div>
   )
@@ -60,7 +60,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           {/* Stats */}
-          <div ref={statsRef} className="grid grid-cols-3 gap-8">
+          <div ref={statsRef} className="grid grid-cols-3 gap-x-10 gap-y-4">
             {ABOUT_STATS.map((stat) => (
               <StatItem key={stat.labelEn} stat={stat} active={statsInView} />
             ))}
