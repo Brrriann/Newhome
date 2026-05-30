@@ -18,7 +18,7 @@ type Item = {
   features: string[]
   mockup: ReactNode
   designWidth: number
-  maxScale: number
+  designHeight: number
 }
 
 const ITEMS: Item[] = [
@@ -31,7 +31,7 @@ const ITEMS: Item[] = [
     features: ['문서 검색 · 출처 인용', '멀티턴 대화 & 컨텍스트', '사내 데이터 보안 격리'],
     mockup: <RagChatMockup />,
     designWidth: 460,
-    maxScale: 1.2,
+    designHeight: 416,
   },
   {
     id: 'dashboard',
@@ -42,7 +42,7 @@ const ITEMS: Item[] = [
     features: ['실시간 차트 & 리포트', '역할 기반 접근 제어', '자동화 워크플로우'],
     mockup: <DashboardMockup />,
     designWidth: 460,
-    maxScale: 1.2,
+    designHeight: 416,
   },
   {
     id: 'attendance',
@@ -53,7 +53,7 @@ const ITEMS: Item[] = [
     features: ['GPS 위치 기반 인증', '얼굴 · 지문 생체 인증', '실시간 근태 집계 & 리포트'],
     mockup: <AttendanceMockup />,
     designWidth: 252,
-    maxScale: 1,
+    designHeight: 514,
   },
   {
     id: 'monitoring',
@@ -64,7 +64,7 @@ const ITEMS: Item[] = [
     features: ['실시간 지표 감시', '이상 감지 & 자동 알림', '장애 이력 분석'],
     mockup: <MonitoringMockup />,
     designWidth: 460,
-    maxScale: 1.2,
+    designHeight: 416,
   },
 ]
 
@@ -85,7 +85,7 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className={flipped ? 'lg:order-2' : ''}
       >
-        <ScaleToFit designWidth={item.designWidth} maxScale={item.maxScale}>
+        <ScaleToFit designWidth={item.designWidth} designHeight={item.designHeight}>
           {item.mockup}
         </ScaleToFit>
       </motion.div>

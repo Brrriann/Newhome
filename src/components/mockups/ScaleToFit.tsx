@@ -3,50 +3,43 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 
 /**
- * Renders children at a fixed design width and scales them to fit (or fill) the
- * available width. Keeps dense mockups pixel-perfect at any screen size instead
- * of letting their internal grids overflow on small screens.
+ * Renders children at a fixed design size and scales them DOWN to fit narrow
+ * screens (never up). Uses an explicit design height so the reserved space is
+ * always exact — no measuring, no layout feedback loops, no runaway height.
  */
 export default function ScaleToFit({
   designWidth,
-  maxScale = 1.25,
+  designHeight,
   children,
 }: {
   designWidth: number
-  maxScale?: number
+  designHeight: number
   children: ReactNode
 }) {
   const outer = useRef<HTMLDivElement>(null)
-  const inner = useRef<HTMLDivElement>(null)
-  const [dims, setDims] = useState({ scale: 1, height: 0 })
+  const [scale, setScale] = useState(1)
 
   useEffect(() => {
     const o = outer.current
-    const i = inner.current
-    if (!o || !i) return
-    const update = () => {
-      const w = o.clientWidth
-      const scale = Math.min(maxScale, w / designWidth)
-      setDims({ scale, height: i.offsetHeight * scale })
-    }
+    if (!o) return
+    const update = () => setScale(Math.min(1, o.clientWidth / designWidth))
     update()
     const ro = new ResizeObserver(update)
     ro.observe(o)
-    ro.observe(i)
     return () => ro.disconnect()
-  }, [designWidth, maxScale])
+  }, [designWidth])
 
   return (
     <div
       ref={outer}
       className="w-full flex justify-center"
-      style={{ height: dims.height || undefined }}
+      style={{ height: designHeight * scale }}
     >
       <div
-        ref={inner}
         style={{
           width: designWidth,
-          transform: `scale(${dims.scale})`,
+          height: designHeight,
+          transform: `scale(${scale})`,
           transformOrigin: 'top center',
         }}
       >
