@@ -25,7 +25,7 @@ function ServiceCard({
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
       data-cursor
-      className="group relative overflow-hidden bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-xl p-8 hover:border-accent/40 hover:shadow-[0_0_32px_rgba(0,229,204,0.12)] hover:-translate-y-1 transition-all duration-300"
+      className="group relative overflow-hidden bg-[#0e0e11] border border-white/10 rounded-xl p-8 hover:border-accent/40 hover:shadow-[0_0_32px_rgba(0,229,204,0.12)] hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-300"
     >
       {/* Soft accent glow that fades in on hover */}
       <div className="pointer-events-none absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(140px_circle_at_50%_0%,rgba(0,229,204,0.10),transparent_70%)]" />

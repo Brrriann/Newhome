@@ -3,6 +3,7 @@
 import { useRef, type ReactNode } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Check } from 'lucide-react'
+import ScaleToFit from './mockups/ScaleToFit'
 import RagChatMockup from './mockups/RagChatMockup'
 import DashboardMockup from './mockups/DashboardMockup'
 import AttendanceMockup from './mockups/AttendanceMockup'
@@ -16,6 +17,8 @@ type Item = {
   desc: string
   features: string[]
   mockup: ReactNode
+  designWidth: number
+  maxScale: number
 }
 
 const ITEMS: Item[] = [
@@ -27,6 +30,8 @@ const ITEMS: Item[] = [
     desc: '사내 문서를 학습한 검색증강생성(RAG) 챗봇으로 정확한 답변과 출처를 제공합니다. 환각 없이, 근거와 함께 답하는 AI를 구축합니다.',
     features: ['문서 검색 · 출처 인용', '멀티턴 대화 & 컨텍스트', '사내 데이터 보안 격리'],
     mockup: <RagChatMockup />,
+    designWidth: 460,
+    maxScale: 1.2,
   },
   {
     id: 'dashboard',
@@ -36,6 +41,8 @@ const ITEMS: Item[] = [
     desc: '흩어진 데이터를 한 곳에서. 실시간 지표와 관리 도구로 의사결정을 가속하고, 수작업을 자동화된 워크플로우로 전환합니다.',
     features: ['실시간 차트 & 리포트', '역할 기반 접근 제어', '자동화 워크플로우'],
     mockup: <DashboardMockup />,
+    designWidth: 460,
+    maxScale: 1.2,
   },
   {
     id: 'attendance',
@@ -45,6 +52,8 @@ const ITEMS: Item[] = [
     desc: 'GPS 위치와 생체 인증으로 정확한 출퇴근을 기록하고, 근태 데이터를 실시간으로 집계합니다. 수기 관리에서 벗어나 인사 업무를 자동화합니다.',
     features: ['GPS 위치 기반 인증', '얼굴 · 지문 생체 인증', '실시간 근태 집계 & 리포트'],
     mockup: <AttendanceMockup />,
+    designWidth: 252,
+    maxScale: 1,
   },
   {
     id: 'monitoring',
@@ -54,6 +63,8 @@ const ITEMS: Item[] = [
     desc: '설비·서버·IoT 상태를 실시간으로 감시하고 이상을 즉시 감지·알림합니다. 장애를 예방하고 운영 데이터를 한 화면에 모아 대응 속도를 높입니다.',
     features: ['실시간 지표 감시', '이상 감지 & 자동 알림', '장애 이력 분석'],
     mockup: <MonitoringMockup />,
+    designWidth: 460,
+    maxScale: 1.2,
   },
 ]
 
@@ -74,7 +85,9 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className={`lg:sticky lg:top-28 ${flipped ? 'lg:order-2' : ''}`}
       >
-        {item.mockup}
+        <ScaleToFit designWidth={item.designWidth} maxScale={item.maxScale}>
+          {item.mockup}
+        </ScaleToFit>
       </motion.div>
 
       {/* Copy */}

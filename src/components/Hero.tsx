@@ -63,12 +63,11 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   })
 
-  // Parallax: text drifts up faster, Spline drifts slower → depth
-  const textYRaw = useTransform(scrollYProgress, [0, 1], [0, -120])
-  const splineYRaw = useTransform(scrollYProgress, [0, 1], [0, 60])
+  // Parallax only on the (light) text. The Spline canvas is NOT transformed on
+  // scroll — compositing a live WebGL canvas every frame causes jank.
+  const textYRaw = useTransform(scrollYProgress, [0, 1], [0, -90])
   const fadeRaw = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const textY = reduceMotion ? 0 : textYRaw
-  const splineY = reduceMotion ? 0 : splineYRaw
   const contentOpacity = reduceMotion ? 1 : fadeRaw
 
   useEffect(() => {
@@ -83,13 +82,10 @@ export default function Hero() {
       className="relative min-h-screen overflow-hidden bg-black dot-grid"
     >
       {/* Spline Robot — full-width so the robot is centered and the star of the
-          hero. Mobile: dimmed atmospheric background. */}
-      <motion.div
-        className="absolute inset-0 z-10 opacity-30 md:opacity-100"
-        style={{ y: splineY }}
-      >
+          hero. Mobile: dimmed atmospheric background. Not transformed on scroll. */}
+      <div className="absolute inset-0 z-10 opacity-30 md:opacity-100">
         <SplineScene className="w-full h-full" onReady={() => setRobotReady(true)} />
-      </motion.div>
+      </div>
 
       {/* Text overlay — pointer-events-none so mouse passes through to the robot.
           Interactive children opt back in with pointer-events-auto. */}
