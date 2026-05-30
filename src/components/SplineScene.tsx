@@ -8,6 +8,9 @@ import RobotLoader from '@/components/RobotLoader'
 // Client-only — Spline needs the browser (canvas/WebGL).
 const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false })
 
+// The Spline runtime Application exposes play()/stop() to control its render loop.
+type SplineApp = { play?: () => void; stop?: () => void }
+
 interface Props {
   className?: string
   /** Called once the scene has loaded (or failsafe fires). */
@@ -17,14 +20,16 @@ interface Props {
 /**
  * Renders the Spline robot as an in-page canvas via @splinetool/react-spline.
  * - A black cover with a cute robot loader shows until the scene loads.
- * - Lighter than the iframe viewer and keeps pointer interaction in-document,
- *   so the custom cursor tracks over the robot too.
+ * - Pauses the WebGL render loop while the hero is off-screen so it doesn't
+ *   compete with scrolling further down the page (big smoothness win).
  * - Failsafe reveal at 15s if onLoad never fires.
  */
 export default function SplineScene({ className = '', onReady }: Props) {
   const [revealed, setRevealed] = useState(false)
   const notified = useRef(false)
   const failsafe = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const appRef = useRef<SplineApp | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const reveal = () => {
     setRevealed(true)
@@ -32,6 +37,11 @@ export default function SplineScene({ className = '', onReady }: Props) {
       notified.current = true
       onReady?.()
     }
+  }
+
+  const handleLoad = (app: SplineApp) => {
+    appRef.current = app
+    reveal()
   }
 
   useEffect(() => {
@@ -42,9 +52,26 @@ export default function SplineScene({ className = '', onReady }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Pause rendering when the hero scrolls out of view, resume when back.
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const app = appRef.current
+        if (!app) return
+        if (entry.isIntersecting) app.play?.()
+        else app.stop?.()
+      },
+      { threshold: 0 },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
-    <div className={`relative bg-black ${className}`}>
-      <Spline scene={SPLINE_SCENE_URL} onLoad={reveal} className="!w-full !h-full" />
+    <div ref={containerRef} className={`relative bg-black ${className}`}>
+      <Spline scene={SPLINE_SCENE_URL} onLoad={handleLoad} className="!w-full !h-full" />
 
       {/* Black cover with the cute robot loader — fades out when the scene loads */}
       <div

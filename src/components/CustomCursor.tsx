@@ -21,11 +21,8 @@ export default function CustomCursor() {
   const x = useMotionValue(-100)
   const y = useMotionValue(-100)
 
-  // Very snappy spring — settles within ~1 frame, so no perceptible trail.
-  const springCfg = { stiffness: 1200, damping: 50, mass: 0.25 }
-  const dotX = useSpring(x, springCfg)
-  const dotY = useSpring(y, springCfg)
-  // Ring follows just a touch looser for a subtle reticle feel.
+  // Dot tracks the pointer directly (no spring). Only the ring uses a light
+  // spring for a subtle reticle feel — fewer running springs = less scroll cost.
   const ringX = useSpring(x, { stiffness: 700, damping: 40, mass: 0.4 })
   const ringY = useSpring(y, { stiffness: 700, damping: 40, mass: 0.4 })
 
@@ -93,7 +90,7 @@ export default function CustomCursor() {
       <motion.div
         aria-hidden
         className="pointer-events-none fixed top-0 left-0 z-[100] hidden md:block"
-        style={{ x: dotX, y: dotY, opacity: visible ? 1 : 0 }}
+        style={{ x, y, opacity: visible ? 1 : 0 }}
       >
         <motion.div
           className="rounded-full bg-accent shadow-[0_0_12px_rgba(0,229,204,0.8)]"
