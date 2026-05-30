@@ -43,10 +43,10 @@ export default function SplineScene({ className = '', onReady }: Props) {
   }, [])
 
   const handleLoad = () => {
-    // onLoad fires when the page loads, but the 3D scene needs a moment more to
-    // paint past its green background — wait briefly, then fade the cover out.
+    // onLoad fires once the scene's resources have loaded (green bg is gone by
+    // then) — a short delay just smooths the cross-fade.
     if (revealTimer.current) clearTimeout(revealTimer.current)
-    revealTimer.current = setTimeout(reveal, 1400)
+    revealTimer.current = setTimeout(reveal, 500)
   }
 
   return (
