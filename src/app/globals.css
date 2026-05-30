@@ -39,6 +39,39 @@
     background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
     background-size: 32px 32px;
   }
+
+  /* Hide native cursor on fine-pointer devices — custom cursor takes over.
+     Touch devices keep their default behavior. */
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
+    a,
+    button,
+    [data-cursor] {
+      cursor: none;
+    }
+  }
+
+  /* Accessibility: kill all motion when the user prefers reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+    @media (pointer: fine) {
+      body,
+      a,
+      button,
+      [data-cursor] {
+        cursor: auto;
+      }
+    }
+  }
 }
 
 @utility container-app {
