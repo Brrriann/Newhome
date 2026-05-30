@@ -158,7 +158,7 @@ export default function Showcase() {
           </p>
         </motion.div>
 
-        <div className="divide-y divide-white/5">
+        <div>
           {ITEMS.map((item, i) => (
             <ShowcaseRow key={item.id} item={item} index={i} />
           ))}
