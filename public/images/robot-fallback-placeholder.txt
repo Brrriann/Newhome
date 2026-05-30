@@ -1,0 +1,2 @@
+Export the NEXBOT robot as PNG from Spline editor and save as:
+public/images/robot-fallback.png (recommended: 1200x900px)
