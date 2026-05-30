@@ -40,10 +40,12 @@ export const ABOUT_STATS = [
 ] as const;
 
 export const SOCIAL_LINKS = [
-  { platform: 'LinkedIn', href: 'https://linkedin.com/company/magnatekorea', label: 'LinkedIn' },
-  { platform: 'GitHub',   href: 'https://github.com/magnatekorea', label: 'GitHub' },
+  { platform: 'LinkedIn', href: 'https://linkedin.com/company/magnatekorea' },
+  { platform: 'GitHub',   href: 'https://github.com/magnatekorea' },
 ] as const;
 
 export const CONTACT_EMAIL = 'hello@magnatekorea.com';
 
-export const SPLINE_SCENE_URL = 'https://prod.spline.design/qBCBPTsCSmcuOrmVTm0vsbbX/scene.splinecode';
+export const SPLINE_SCENE_URL =
+  process.env.NEXT_PUBLIC_SPLINE_SCENE_URL ??
+  'https://prod.spline.design/qBCBPTsCSmcuOrmVTm0vsbbX/scene.splinecode';
