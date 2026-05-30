@@ -108,7 +108,7 @@ export default function Hero() {
             </motion.p>
 
             <h1
-              className="font-syne font-extrabold text-white leading-[1.05] mb-5"
+              className="font-syne font-extrabold text-white leading-[1.05] mb-5 whitespace-nowrap"
               style={{ fontSize: 'clamp(26px, 4vw, 44px)' }}
             >
               <RevealLine active={robotReady} delay={0.1}>We Think.</RevealLine>
