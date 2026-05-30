@@ -78,12 +78,12 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
       ref={ref}
       className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center py-12 lg:py-20"
     >
-      {/* Mockup */}
+      {/* Mockup — min-w-0 lets the column shrink below the mockup's design width */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className={flipped ? 'lg:order-2' : ''}
+        className={`min-w-0 ${flipped ? 'lg:order-2' : ''}`}
       >
         <ScaleToFit designWidth={item.designWidth} designHeight={item.designHeight}>
           {item.mockup}
@@ -95,7 +95,7 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-        className={`flex flex-col justify-center ${flipped ? 'lg:order-1' : ''}`}
+        className={`flex flex-col justify-center min-w-0 ${flipped ? 'lg:order-1' : ''}`}
       >
         <span className="font-inter font-medium text-accent text-[11px] tracking-[0.25em] mb-4">
           {item.tag}
