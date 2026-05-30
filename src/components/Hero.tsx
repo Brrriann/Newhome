@@ -78,17 +78,19 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen overflow-hidden bg-black dot-grid"
     >
-      {/* Spline Robot — desktop: right 60%, mobile: full width low opacity */}
+      {/* Spline Robot — full-width so the robot sits centered and can track the
+          cursor across the whole hero. Mobile: dimmed atmospheric background. */}
       <motion.div
-        className="absolute inset-0 md:left-[40%] z-10 opacity-20 md:opacity-100"
+        className="absolute inset-0 z-10 opacity-20 md:opacity-100"
         style={{ y: splineY }}
       >
         <SplineScene className="w-full h-full" />
       </motion.div>
 
-      {/* Text overlay */}
+      {/* Text overlay — pointer-events-none so mouse passes through to the robot.
+          Interactive children opt back in with pointer-events-auto. */}
       <motion.div
-        className="relative z-20 flex flex-col justify-end min-h-screen pb-20 md:pb-16"
+        className="relative z-20 flex flex-col justify-end min-h-screen pb-20 md:pb-16 pointer-events-none"
         style={{ y: textY, opacity: contentOpacity }}
       >
         <div className="container-app">
@@ -138,7 +140,7 @@ export default function Hero() {
               소통과 인사이트로 디지털 전환을 이끕니다
             </motion.p>
 
-            <motion.div {...fadeUp(0.75)}>
+            <motion.div {...fadeUp(0.75)} className="pointer-events-auto inline-block">
               <MagneticButton
                 href="#contact"
                 className="inline-block border border-accent text-accent px-6 py-3 rounded text-sm font-medium hover:bg-accent hover:text-black transition-colors duration-200"
@@ -152,7 +154,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
         animate={{ opacity: showScroll ? 1 : 0, y: showScroll ? 0 : 8 }}
         transition={{ duration: 0.3 }}
       >

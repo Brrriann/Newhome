@@ -14,6 +14,9 @@ export default function CustomCursor() {
   const reduceMotion = useReducedMotion()
   const [enabled, setEnabled] = useState(false)
   const [hovering, setHovering] = useState(false)
+  // Hidden while the pointer is over an iframe (e.g. the Spline scene), where
+  // the parent document stops receiving mousemove and the dot would freeze.
+  const [visible, setVisible] = useState(true)
 
   // Raw pointer position
   const x = useMotionValue(-100)
@@ -51,11 +54,20 @@ export default function CustomCursor() {
       setHovering(!!target?.closest('a, button, [data-cursor]'))
     }
 
+    // Pointer leaving the document body usually means it entered an iframe
+    // (or left the window) — hide the dot so it doesn't freeze mid-screen.
+    const leave = () => setVisible(false)
+    const enter = () => setVisible(true)
+
     window.addEventListener('mousemove', move, { passive: true })
     window.addEventListener('mouseover', over, { passive: true })
+    document.addEventListener('mouseleave', leave)
+    document.addEventListener('mouseenter', enter)
     return () => {
       window.removeEventListener('mousemove', move)
       window.removeEventListener('mouseover', over)
+      document.removeEventListener('mouseleave', leave)
+      document.removeEventListener('mouseenter', enter)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [reduceMotion, x, y])
@@ -68,7 +80,7 @@ export default function CustomCursor() {
       <motion.div
         aria-hidden
         className="pointer-events-none fixed top-0 left-0 z-[100] hidden md:block"
-        style={{ x: ringX, y: ringY }}
+        style={{ x: ringX, y: ringY, opacity: visible ? 1 : 0 }}
       >
         <motion.div
           className="rounded-full border border-accent/60"
@@ -86,7 +98,7 @@ export default function CustomCursor() {
       <motion.div
         aria-hidden
         className="pointer-events-none fixed top-0 left-0 z-[100] hidden md:block"
-        style={{ x, y }}
+        style={{ x, y, opacity: visible ? 1 : 0 }}
       >
         <motion.div
           className="rounded-full bg-accent shadow-[0_0_12px_rgba(0,229,204,0.8)]"
