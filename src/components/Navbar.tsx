@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { NAV_LINKS } from '@/lib/constants'
 import { Menu, X } from 'lucide-react'
+import MagneticButton from '@/components/MagneticButton'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -36,12 +37,13 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
+          <MagneticButton
             href="#contact"
-            className="text-sm border border-accent text-accent px-4 py-2 rounded hover:bg-accent hover:text-black transition-all duration-200"
+            strength={10}
+            className="inline-block text-sm border border-accent text-accent px-4 py-2 rounded hover:bg-accent hover:text-black transition-colors duration-200"
           >
             Get in Touch →
-          </a>
+          </MagneticButton>
         </div>
 
         {/* Mobile hamburger */}
