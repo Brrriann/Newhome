@@ -79,7 +79,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="font-syne font-semibold text-white text-4xl md:text-5xl mb-4">
+          <h2 className="font-syne font-semibold text-white text-3xl sm:text-4xl md:text-5xl mb-4 break-words">
             Let&apos;s Work Together
           </h2>
           <p className="font-inter text-[#888888] text-lg">Tell us about your project</p>

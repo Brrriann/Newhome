@@ -76,7 +76,7 @@ export default function About() {
             <p className="font-inter font-medium text-accent text-xs tracking-[0.3em] mb-4">
               ABOUT US
             </p>
-            <h2 className="font-syne font-semibold text-white text-3xl md:text-4xl leading-tight mb-6">
+            <h2 className="font-syne font-semibold text-white text-2xl sm:text-3xl md:text-4xl leading-tight mb-6 break-words">
               We Think in Systems.<br />We Build for Humans.
             </h2>
             <p className="font-inter text-[#888888] text-base leading-[1.75] mb-4">

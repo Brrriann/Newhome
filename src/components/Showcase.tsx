@@ -100,7 +100,7 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
         <span className="font-inter font-medium text-accent text-[11px] tracking-[0.25em] mb-4">
           {item.tag}
         </span>
-        <h3 className="font-syne font-bold text-white text-3xl md:text-4xl mb-1">
+        <h3 className="font-syne font-bold text-white text-2xl sm:text-3xl md:text-4xl mb-1 break-words">
           {item.titleEn}
         </h3>
         <p className="font-pretendard text-[#777] text-base mb-5">{item.titleKo}</p>
@@ -142,7 +142,7 @@ export default function Showcase() {
           <span className="font-inter font-medium text-accent text-[12px] tracking-[0.3em]">
             WHAT WE BUILD
           </span>
-          <h2 className="font-syne font-semibold text-white text-4xl md:text-5xl mt-4 mb-4">
+          <h2 className="font-syne font-semibold text-white text-3xl sm:text-4xl md:text-5xl mt-4 mb-4 break-words">
             From Insight to Product
           </h2>
           <p className="font-pretendard text-[#888] text-lg max-w-2xl mx-auto">
