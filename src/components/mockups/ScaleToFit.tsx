@@ -32,7 +32,7 @@ export default function ScaleToFit({
   return (
     <div
       ref={outer}
-      className="w-full flex justify-start"
+      className="w-full flex justify-center"
       style={{ height: designHeight * scale }}
     >
       <div
@@ -40,7 +40,7 @@ export default function ScaleToFit({
           width: designWidth,
           height: designHeight,
           transform: `scale(${scale})`,
-          transformOrigin: 'top left',
+          transformOrigin: 'top center',
         }}
       >
         {children}
