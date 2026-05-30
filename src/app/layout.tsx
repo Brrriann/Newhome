@@ -30,6 +30,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${syne.variable} ${inter.variable}`}>
+      {/* Warm up connections to Spline's CDNs so the 3D scene starts sooner */}
+      <link rel="preconnect" href="https://my.spline.design" crossOrigin="" />
+      <link rel="preconnect" href="https://prod.spline.design" crossOrigin="" />
+      <link rel="dns-prefetch" href="https://my.spline.design" />
+      <link rel="dns-prefetch" href="https://prod.spline.design" />
       <body className="antialiased">
         <CustomCursor />
         <ScrollProgress />
