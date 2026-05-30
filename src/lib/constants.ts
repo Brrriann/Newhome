@@ -52,8 +52,8 @@ export const WEB3FORMS_KEY =
   process.env.NEXT_PUBLIC_WEB3FORMS_KEY ??
   'e706c730-5c3e-46ee-a921-df650f7d84fe';
 
-// Spline embed (iframe viewer link from Spline "Share → Embed").
-// To swap scenes: open in Spline editor → Share → copy the my.spline.design URL.
-export const SPLINE_VIEWER_URL =
-  process.env.NEXT_PUBLIC_SPLINE_VIEWER_URL ??
-  'https://my.spline.design/nexbotrobotcharacterconcept-qBCBPTsCSmcuOrmVTm0vsbbX/';
+// Spline scene file (Code Export → React). Lighter than the iframe viewer and
+// renders as a canvas in-page. To swap: Spline editor → Export → Code Export.
+export const SPLINE_SCENE_URL =
+  process.env.NEXT_PUBLIC_SPLINE_SCENE_URL ??
+  'https://prod.spline.design/Ega8bUjjK30qtWEu/scene.splinecode';

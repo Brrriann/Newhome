@@ -1,28 +1,30 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { SPLINE_VIEWER_URL } from '@/lib/constants'
+import { useState, useRef, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+import { SPLINE_SCENE_URL } from '@/lib/constants'
 import RobotLoader from '@/components/RobotLoader'
+
+// Client-only — Spline needs the browser (canvas/WebGL).
+const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false })
 
 interface Props {
   className?: string
-  /** Called once the scene is revealed (loaded or failsafe). */
+  /** Called once the scene has loaded (or failsafe fires). */
   onReady?: () => void
 }
 
 /**
- * Embeds a published Spline scene via iframe (the my.spline.design viewer link).
- * - A black cover with a cute robot loader sits over the iframe during load and
- *   fades out once the scene is ready (so the green loading bg never shows).
- * - Calls onReady when revealed so the parent can stage in its own content.
- * - The cover becomes pointer-events-none after reveal so the robot can track
- *   the cursor. Failsafe reveal at 12s if onLoad never fires.
+ * Renders the Spline robot as an in-page canvas via @splinetool/react-spline.
+ * - A black cover with a cute robot loader shows until the scene loads.
+ * - Lighter than the iframe viewer and keeps pointer interaction in-document,
+ *   so the custom cursor tracks over the robot too.
+ * - Failsafe reveal at 15s if onLoad never fires.
  */
 export default function SplineScene({ className = '', onReady }: Props) {
   const [revealed, setRevealed] = useState(false)
-  const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const failsafe = useRef<ReturnType<typeof setTimeout> | null>(null)
   const notified = useRef(false)
+  const failsafe = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const reveal = () => {
     setRevealed(true)
@@ -33,37 +35,20 @@ export default function SplineScene({ className = '', onReady }: Props) {
   }
 
   useEffect(() => {
-    // Reveal no matter what after 12s (slow connections / missed onLoad).
-    failsafe.current = setTimeout(reveal, 12000)
+    failsafe.current = setTimeout(reveal, 15000)
     return () => {
-      if (revealTimer.current) clearTimeout(revealTimer.current)
       if (failsafe.current) clearTimeout(failsafe.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleLoad = () => {
-    // onLoad fires once the scene's resources have loaded (green bg is gone by
-    // then) — a short delay just smooths the cross-fade.
-    if (revealTimer.current) clearTimeout(revealTimer.current)
-    revealTimer.current = setTimeout(reveal, 500)
-  }
-
   return (
     <div className={`relative bg-black ${className}`}>
-      {/* Spline iframe */}
-      <iframe
-        src={SPLINE_VIEWER_URL}
-        title="Magnate Korea 3D scene"
-        onLoad={handleLoad}
-        style={{ background: '#000' }}
-        className="absolute inset-0 w-full h-full border-0"
-        allow="autoplay; fullscreen"
-      />
+      <Spline scene={SPLINE_SCENE_URL} onLoad={reveal} className="!w-full !h-full" />
 
-      {/* Black reveal cover with the cute robot loader. Fades out when ready. */}
+      {/* Black cover with the cute robot loader — fades out when the scene loads */}
       <div
-        className={`absolute inset-0 bg-black flex items-center justify-center transition-opacity duration-1000 ${
+        className={`absolute inset-0 bg-black flex items-center justify-center transition-opacity duration-700 ${
           revealed ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
