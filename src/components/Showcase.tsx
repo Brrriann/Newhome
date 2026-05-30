@@ -19,6 +19,7 @@ type Item = {
   mockup: ReactNode
   designWidth: number
   designHeight: number
+  maxScale: number
 }
 
 const ITEMS: Item[] = [
@@ -32,6 +33,7 @@ const ITEMS: Item[] = [
     mockup: <RagChatMockup />,
     designWidth: 460,
     designHeight: 416,
+    maxScale: 1.5,
   },
   {
     id: 'dashboard',
@@ -43,6 +45,7 @@ const ITEMS: Item[] = [
     mockup: <DashboardMockup />,
     designWidth: 460,
     designHeight: 416,
+    maxScale: 1.5,
   },
   {
     id: 'attendance',
@@ -54,6 +57,7 @@ const ITEMS: Item[] = [
     mockup: <AttendanceMockup />,
     designWidth: 252,
     designHeight: 514,
+    maxScale: 1.1,
   },
   {
     id: 'monitoring',
@@ -65,6 +69,7 @@ const ITEMS: Item[] = [
     mockup: <MonitoringMockup />,
     designWidth: 460,
     designHeight: 416,
+    maxScale: 1.5,
   },
 ]
 
@@ -85,7 +90,7 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className={`min-w-0 ${flipped ? 'lg:order-2' : ''}`}
       >
-        <ScaleToFit designWidth={item.designWidth} designHeight={item.designHeight}>
+        <ScaleToFit designWidth={item.designWidth} designHeight={item.designHeight} maxScale={item.maxScale}>
           {item.mockup}
         </ScaleToFit>
       </motion.div>

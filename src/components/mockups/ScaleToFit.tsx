@@ -10,10 +10,12 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 export default function ScaleToFit({
   designWidth,
   designHeight,
+  maxScale = 1,
   children,
 }: {
   designWidth: number
   designHeight: number
+  maxScale?: number
   children: ReactNode
 }) {
   const outer = useRef<HTMLDivElement>(null)
@@ -22,12 +24,12 @@ export default function ScaleToFit({
   useEffect(() => {
     const o = outer.current
     if (!o) return
-    const update = () => setScale(Math.min(1, o.clientWidth / designWidth))
+    const update = () => setScale(Math.min(maxScale, o.clientWidth / designWidth))
     update()
     const ro = new ResizeObserver(update)
     ro.observe(o)
     return () => ro.disconnect()
-  }, [designWidth])
+  }, [designWidth, maxScale])
 
   return (
     <div
