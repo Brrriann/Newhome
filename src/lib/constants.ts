@@ -46,6 +46,12 @@ export const SOCIAL_LINKS = [
 
 export const CONTACT_EMAIL = 'hello@magnatekorea.com';
 
+// Web3Forms public access key (designed to be exposed client-side).
+// Override per-environment with NEXT_PUBLIC_WEB3FORMS_KEY if needed.
+export const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ??
+  'e706c730-5c3e-46ee-a921-df650f7d84fe';
+
 // Spline embed (iframe viewer link from Spline "Share → Embed").
 // To swap scenes: open in Spline editor → Share → copy the my.spline.design URL.
 export const SPLINE_VIEWER_URL =

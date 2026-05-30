@@ -2,8 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import emailjs from '@emailjs/browser'
-import { CONTACT_EMAIL } from '@/lib/constants'
+import { CONTACT_EMAIL, WEB3FORMS_KEY } from '@/lib/constants'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
 type FormData = { name: string; email: string; message: string }
@@ -16,11 +15,6 @@ function validate(data: FormData): FormErrors {
   if (!data.message || data.message.trim().length < 20) errors.message = 'Message must be at least 20 characters'
   return errors
 }
-
-const emailjsConfigured =
-  !!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
-  !!process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID &&
-  !!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 
 export default function Contact() {
   const ref = useRef(null)
@@ -43,14 +37,28 @@ export default function Contact() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     setState('submitting')
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        { from_name: form.name, from_email: form.email, message: form.message },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-      )
-      setState('success')
-      setForm({ name: '', email: '', message: '' })
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `New inquiry from ${form.name} — Magnate Korea`,
+          from_name: form.name,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setState('success')
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        setState('error')
+      }
     } catch {
       setState('error')
     }
@@ -91,19 +99,12 @@ export default function Contact() {
             {errors.message && <p className="text-red-400 text-sm mt-1">{errors.message}</p>}
           </div>
 
-          {!emailjsConfigured ? (
-            <button type="button" disabled title="Contact form coming soon"
-              className="w-full bg-[#333] text-[#666] font-semibold py-4 rounded-lg cursor-not-allowed text-sm">
-              Contact Form Coming Soon
-            </button>
-          ) : (
-            <button type="submit" disabled={state === 'submitting' || state === 'success'}
-              className="w-full bg-accent text-black font-semibold py-4 rounded-lg hover:bg-[#00ccb4] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2">
-              {state === 'submitting' ? (
-                <span className="animate-spin rounded-full h-5 w-5 border-2 border-black border-t-transparent" />
-              ) : 'Send Message'}
-            </button>
-          )}
+          <button type="submit" data-cursor disabled={state === 'submitting' || state === 'success'}
+            className="w-full bg-accent text-black font-semibold py-4 rounded-lg hover:bg-[#00ccb4] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2">
+            {state === 'submitting' ? (
+              <span className="animate-spin rounded-full h-5 w-5 border-2 border-black border-t-transparent" />
+            ) : 'Send Message'}
+          </button>
 
           {state === 'success' && (
             <p className="text-green-400 text-center text-sm">Thank you! We&apos;ll be in touch.</p>
