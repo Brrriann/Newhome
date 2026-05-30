@@ -28,7 +28,7 @@ export default function DashboardMockup() {
         </div>
 
         {/* Main */}
-        <div className="flex-1 p-4 overflow-hidden">
+        <div className="flex-1 p-4 overflow-hidden flex flex-col">
           <div className="flex items-center justify-between mb-3">
             <span className="text-white font-medium">Analytics</span>
             <span className="text-[#666] border border-white/10 rounded px-2 py-0.5">
@@ -56,9 +56,10 @@ export default function DashboardMockup() {
             ))}
           </div>
 
-          {/* Chart */}
-          <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3">
-            <div className="flex items-end gap-1.5 h-20">
+          {/* Chart — fills remaining height */}
+          <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3 flex-1 flex flex-col">
+            <div className="text-[#666] text-[9px] mb-2">매출 추이</div>
+            <div className="flex items-end gap-1.5 flex-1">
               {bars.map((h, i) => (
                 <div
                   key={i}
