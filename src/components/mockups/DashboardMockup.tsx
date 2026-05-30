@@ -39,19 +39,19 @@ export default function DashboardMockup() {
           {/* Stat cards */}
           <div className="grid grid-cols-3 gap-2 mb-3">
             {[
-              { l: 'Revenue', v: '₩48.2M', d: '+12.4%' },
-              { l: 'Users', v: '8,914', d: '+5.1%' },
-              { l: 'Conversion', v: '3.8%', d: '+0.6%' },
+              { l: 'Rev.', v: '₩48M', d: '+12.4%' },
+              { l: 'Users', v: '8.9k', d: '+5.1%' },
+              { l: 'Conv.', v: '3.8%', d: '+0.6%' },
             ].map((c) => (
               <div
                 key={c.l}
-                className="rounded-lg border border-white/10 bg-white/[0.03] p-2"
+                className="rounded-lg border border-white/10 bg-white/[0.03] p-2 min-w-0 overflow-hidden"
               >
-                <div className="text-[#666] text-[9px]">{c.l}</div>
-                <div className="text-white font-syne font-bold text-sm mt-0.5">
+                <div className="text-[#666] text-[8px] truncate">{c.l}</div>
+                <div className="text-white font-syne font-bold text-[13px] leading-tight mt-0.5 tabular-nums whitespace-nowrap">
                   {c.v}
                 </div>
-                <div className="text-accent text-[9px]">{c.d}</div>
+                <div className="text-accent text-[8px]">{c.d}</div>
               </div>
             ))}
           </div>

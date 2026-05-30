@@ -61,10 +61,10 @@ export default function MonitoringMockup() {
               ].map((c) => (
                 <div
                   key={c.l}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-2"
+                  className="rounded-lg border border-white/10 bg-white/[0.03] p-2 min-w-0 overflow-hidden"
                 >
-                  <div className="text-[#666] text-[9px]">{c.l}</div>
-                  <div className="text-white font-syne font-bold text-sm mt-0.5 tabular-nums">
+                  <div className="text-[#666] text-[9px] truncate">{c.l}</div>
+                  <div className="text-white font-syne font-bold text-[13px] leading-tight mt-0.5 tabular-nums whitespace-nowrap">
                     {c.v}
                   </div>
                 </div>

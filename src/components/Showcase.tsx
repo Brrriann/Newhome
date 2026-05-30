@@ -81,7 +81,9 @@ function ShowcaseRow({ item, index }: { item: Item; index: number }) {
   return (
     <div
       ref={ref}
-      className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center py-12 lg:py-20"
+      className={`grid gap-10 lg:gap-20 items-center py-12 lg:py-20 ${
+        flipped ? 'lg:grid-cols-[1fr_1.3fr]' : 'lg:grid-cols-[1.3fr_1fr]'
+      }`}
     >
       {/* Mockup — min-w-0 lets the column shrink below the mockup's design width */}
       <motion.div
