@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Static export — no SSR/API in this app, so it ships as plain HTML/JS/CSS.
+  // Cloudflare Pages serves the generated `out/` directory directly.
+  output: 'export',
   reactCompiler: true,
 };
 
