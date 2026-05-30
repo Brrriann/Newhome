@@ -97,7 +97,7 @@ export default function Contact() {
               Contact Form Coming Soon
             </button>
           ) : (
-            <button type="submit" disabled={state === 'submitting'}
+            <button type="submit" disabled={state === 'submitting' || state === 'success'}
               className="w-full bg-accent text-black font-semibold py-4 rounded-lg hover:bg-[#00ccb4] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2">
               {state === 'submitting' ? (
                 <span className="animate-spin rounded-full h-5 w-5 border-2 border-black border-t-transparent" />

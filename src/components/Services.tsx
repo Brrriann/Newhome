@@ -24,7 +24,7 @@ function ServiceCard({
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
-      className="bg-[#111111] border border-white/5 rounded-xl p-8 hover:border-accent/40 hover:shadow-[0_0_24px_rgba(0,229,204,0.1)] hover:scale-[1.02] transition-all duration-250"
+      className="bg-[#111111] border border-white/5 rounded-xl p-8 hover:border-accent/40 hover:shadow-[0_0_24px_rgba(0,229,204,0.1)] hover:scale-[1.02] transition-all duration-200"
     >
       {Icon && <Icon className="text-accent mb-5" size={32} />}
       <h3 className="font-syne font-semibold text-white text-xl mb-1">{service.titleEn}</h3>
