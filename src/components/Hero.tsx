@@ -82,10 +82,13 @@ export default function Hero() {
       className="relative min-h-screen overflow-hidden bg-black dot-grid"
     >
       {/* Spline Robot — full-width so the robot is centered and the star of the
-          hero. Mobile: dimmed atmospheric background. Not transformed on scroll. */}
-      <div className="absolute inset-0 z-10 opacity-30 md:opacity-100">
+          hero. Fully visible on all screens. Not transformed on scroll. */}
+      <div className="absolute inset-0 z-10">
         <SplineScene className="w-full h-full" onReady={() => setRobotReady(true)} />
       </div>
+
+      {/* Bottom scrim — keeps the overlaid text readable over the robot on mobile */}
+      <div className="absolute inset-x-0 bottom-0 h-2/3 z-[15] bg-gradient-to-t from-black via-black/70 to-transparent md:hidden pointer-events-none" />
 
       {/* Text overlay — pointer-events-none so mouse passes through to the robot.
           Interactive children opt back in with pointer-events-auto. */}
