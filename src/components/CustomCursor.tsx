@@ -54,20 +54,25 @@ export default function CustomCursor() {
       setHovering(!!target?.closest('a, button, [data-cursor]'))
     }
 
-    // Pointer leaving the document body usually means it entered an iframe
-    // (or left the window) — hide the dot so it doesn't freeze mid-screen.
-    const leave = () => setVisible(false)
-    const enter = () => setVisible(true)
+    // The pointer entering an iframe (e.g. the Spline robot) stops mousemove
+    // from reaching this page, freezing the dot. Hide it whenever the pointer
+    // leaves the page area (mouseleave on <html>) or focus moves to the iframe
+    // (window blur). Show it again when the pointer re-enters or moves here.
+    const root = document.documentElement
+    const hide = () => setVisible(false)
+    const show = () => setVisible(true)
 
     window.addEventListener('mousemove', move, { passive: true })
     window.addEventListener('mouseover', over, { passive: true })
-    document.addEventListener('mouseleave', leave)
-    document.addEventListener('mouseenter', enter)
+    root.addEventListener('mouseleave', hide)
+    root.addEventListener('mouseenter', show)
+    window.addEventListener('blur', hide)
     return () => {
       window.removeEventListener('mousemove', move)
       window.removeEventListener('mouseover', over)
-      document.removeEventListener('mouseleave', leave)
-      document.removeEventListener('mouseenter', enter)
+      root.removeEventListener('mouseleave', hide)
+      root.removeEventListener('mouseenter', show)
+      window.removeEventListener('blur', hide)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [reduceMotion, x, y])
