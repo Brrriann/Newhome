@@ -38,6 +38,7 @@ export default function ScaleToFit({
       style={{ height: designHeight * scale }}
     >
       <div
+        className="shrink-0"
         style={{
           width: designWidth,
           height: designHeight,
