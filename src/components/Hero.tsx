@@ -108,26 +108,21 @@ export default function Hero() {
             </motion.p>
 
             <h1
-              className="font-syne font-extrabold text-white leading-tight mb-1"
+              className="font-syne font-extrabold text-white leading-[1.05] mb-5"
               style={{ fontSize: 'clamp(26px, 4vw, 44px)' }}
             >
-              <RevealLine active={robotReady} delay={0.1}>Insight Connects.</RevealLine>
-            </h1>
-
-            <h1
-              className="font-syne font-extrabold leading-tight mb-5"
-              style={{ fontSize: 'clamp(26px, 4vw, 44px)' }}
-            >
+              <RevealLine active={robotReady} delay={0.1}>We Think.</RevealLine>
+              <RevealLine active={robotReady} delay={0.22}>We Connect.</RevealLine>
               <RevealLine
                 active={robotReady}
-                delay={0.25}
+                delay={0.34}
                 style={{
                   background: 'linear-gradient(90deg, #00E5CC, #3D8BFF)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                We Build What Matters.
+                We Build.
               </RevealLine>
             </h1>
 
