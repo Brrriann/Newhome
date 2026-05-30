@@ -6,7 +6,7 @@ import { Check } from 'lucide-react'
 import RagChatMockup from './mockups/RagChatMockup'
 import DashboardMockup from './mockups/DashboardMockup'
 import AttendanceMockup from './mockups/AttendanceMockup'
-import EcommerceMockup from './mockups/EcommerceMockup'
+import MonitoringMockup from './mockups/MonitoringMockup'
 
 type Item = {
   id: string
@@ -47,13 +47,13 @@ const ITEMS: Item[] = [
     mockup: <AttendanceMockup />,
   },
   {
-    id: 'commerce',
-    tag: 'WEB · COMMERCE',
-    titleEn: 'E-commerce & Landing',
-    titleKo: '이커머스 & 랜딩',
-    desc: '전환을 위해 설계된 빠르고 감각적인 스토어와 랜딩 페이지. 결제부터 분석까지 매출로 이어지는 흐름을 완성합니다.',
-    features: ['결제 · 정기구독 연동', 'SEO & 성능 최적화', 'A/B 테스트'],
-    mockup: <EcommerceMockup />,
+    id: 'monitoring',
+    tag: 'OPERATIONS · IoT',
+    titleEn: 'Real-time Monitoring',
+    titleKo: '관제 · 모니터링 대시보드',
+    desc: '설비·서버·IoT 상태를 실시간으로 감시하고 이상을 즉시 감지·알림합니다. 장애를 예방하고 운영 데이터를 한 화면에 모아 대응 속도를 높입니다.',
+    features: ['실시간 지표 감시', '이상 감지 & 자동 알림', '장애 이력 분석'],
+    mockup: <MonitoringMockup />,
   },
 ]
 
