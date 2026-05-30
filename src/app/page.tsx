@@ -1,3 +1,10 @@
+import Navbar from '@/components/Navbar'
+
 export default function Home() {
-  return <main className="bg-black min-h-screen" />
+  return (
+    <main>
+      <Navbar />
+      <div className="bg-black" style={{ height: '200vh' }} />
+    </main>
+  )
 }
