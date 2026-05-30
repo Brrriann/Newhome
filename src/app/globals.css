@@ -34,6 +34,7 @@
   body {
     background-color: #000000;
     color: #ffffff;
+    overflow-x: hidden;
   }
   .dot-grid {
     background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);

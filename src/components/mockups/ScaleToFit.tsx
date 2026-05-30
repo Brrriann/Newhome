@@ -32,7 +32,7 @@ export default function ScaleToFit({
   return (
     <div
       ref={outer}
-      className="w-full flex justify-start"
+      className="w-full flex justify-start overflow-hidden"
       style={{ height: designHeight * scale }}
     >
       <div
