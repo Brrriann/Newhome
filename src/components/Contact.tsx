@@ -12,7 +12,7 @@ function validate(data: FormData): FormErrors {
   const errors: FormErrors = {}
   if (!data.name || data.name.trim().length < 2) errors.name = 'Name must be at least 2 characters'
   if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = 'Enter a valid email address'
-  if (!data.message || data.message.trim().length < 20) errors.message = 'Message must be at least 20 characters'
+  if (!data.message || data.message.trim().length < 5) errors.message = 'Message must be at least 5 characters'
   return errors
 }
 
