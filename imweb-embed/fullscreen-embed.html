@@ -1,0 +1,39 @@
+<!--
+  Magnate Korea — 아임웹 전체화면 임베드 스니펫
+  ------------------------------------------------------------------
+  도메인 이전 전까지, Cloudflare Pages에 배포된 페이지를
+  아임웹 위에 "전체 화면 단독 페이지"로 노출하기 위한 코드입니다.
+
+  사용처: 아임웹 관리자 > 해당 페이지 편집 > "HTML 삽입"(코드/위젯) 영역에
+          아래 코드 전체를 붙여넣으세요.
+
+  동작: 화면(viewport) 전체를 iframe으로 덮어, 방문자가 아임웹의
+        헤더/푸터 없이 이 페이지만 보게 됩니다.
+-->
+<style>
+  /* 아임웹 페이지 자체의 스크롤/여백 제거 (이 페이지에서만) */
+  html, body { margin: 0 !important; padding: 0 !important; overflow: hidden !important; }
+
+  #magnate-fullscreen-embed {
+    position: fixed;
+    inset: 0;            /* top:0; right:0; bottom:0; left:0 */
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;      /* 모바일 주소창 대응 (지원 브라우저) */
+    border: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 2147483647; /* 아임웹 헤더/푸터/플로팅 요소 위로 */
+    background: #0a0a0a;  /* 로딩 중 배경 (페이지 톤에 맞춤) */
+  }
+</style>
+
+<iframe
+  id="magnate-fullscreen-embed"
+  src="https://newhome-dg3.pages.dev/"
+  title="Magnate Korea"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; fullscreen; xr-spatial-tracking"
+  allowfullscreen
+  loading="eager"
+  referrerpolicy="no-referrer-when-downgrade"
+></iframe>
